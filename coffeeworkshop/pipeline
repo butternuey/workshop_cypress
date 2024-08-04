@@ -1,0 +1,28 @@
+pipeline {
+ agent {
+        label 'docker01'
+    }
+
+    stages {
+        stage('1. Detect changes') {
+            steps {
+                git branch: 'main', url: 'https://github.com/up1/workshop-cypress-2024.git'
+            }
+        }
+        stage('2. Testing with cypress') {
+            steps {
+                sh 'docker compose up testing --abort-on-container-exit --build'
+            }
+        }
+        stage('3. Generate test report') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('4. Sent test result') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+}
